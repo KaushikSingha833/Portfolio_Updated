@@ -34,7 +34,7 @@ This is my personal portfolio website to showcase my skills and projects.
 ## 🛠️ How to use
 
 1.  Clone the repository.
-2.  Open the `PortfLo.html` file in your browser.
+2.  Open the `index.html` file in your browser.
 
 ## 🔗 Live Demo
 
@@ -44,4 +44,5 @@ This is my personal portfolio website to showcase my skills and projects.
 ## 📄 License
 
 This project is licensed under the MIT License.
+
 
