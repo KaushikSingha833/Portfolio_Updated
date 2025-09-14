@@ -38,9 +38,10 @@ This is my personal portfolio website to showcase my skills and projects.
 
 ## 🔗 Live Demo
 
-[Link will be open stay tuned](https://your-live-portfolio-url.com)
+[View here](https://portfolio-updated-vert.vercel.app/)
 
 
 ## 📄 License
 
 This project is licensed under the MIT License.
+
