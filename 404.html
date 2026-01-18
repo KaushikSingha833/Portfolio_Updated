@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Lost in Space</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* -----------------------------------------------------------
+           1. SHARED THEME
+           ----------------------------------------------------------- */
+        :root {
+            --bg-dark: #030712;
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* -----------------------------------------------------------
+           2. BLACK HOLE ANIMATION
+           ----------------------------------------------------------- */
+        .black-hole-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .black-hole {
+            width: 150px;
+            height: 150px;
+            background: #000;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 30px #6366f1,
+                0 0 60px #ec4899,
+                0 0 100px #6366f1;
+            z-index: 2;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .accretion-disk {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent, #6366f1, #ec4899, transparent);
+            animation: spin 2s linear infinite;
+            filter: blur(10px);
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        /* -----------------------------------------------------------
+           3. TEXT & CONTENT
+           ----------------------------------------------------------- */
+        h1 {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(to right, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        p { color: var(--text-muted); max-width: 400px; margin: 0 auto 40px; }
+
+        .btn-home {
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-home:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* -----------------------------------------------------------
+           4. CURSOR
+           ----------------------------------------------------------- */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--primary); }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 1px solid var(--primary);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        body.hovering .cursor-outline {
+            width: 60px; height: 60px; background-color: rgba(99, 102, 241, 0.1); border-color: var(--secondary);
+        }
+
+        /* -----------------------------------------------------------
+           5. BACKGROUND PARTICLES
+           ----------------------------------------------------------- */
+        #galaxy-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
+
+        /* Glitch Effect for 404 */
+        .glitch-wrapper { position: relative; display: inline-block; }
+        .glitch-wrapper::before, .glitch-wrapper::after {
+            content: "404";
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); 
+        }
+        .glitch-wrapper::before {
+            left: 2px; text-shadow: -1px 0 #ec4899; clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch-wrapper::after {
+            left: -2px; text-shadow: -1px 0 #6366f1; clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 31px, 0); }
+            20% { clip: rect(80px, 9999px, 10px, 0); }
+            40% { clip: rect(50px, 9999px, 90px, 0); }
+            60% { clip: rect(20px, 9999px, 60px, 0); }
+            80% { clip: rect(90px, 9999px, 20px, 0); }
+            100% { clip: rect(10px, 9999px, 80px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(40px, 9999px, 80px, 0); }
+            20% { clip: rect(10px, 9999px, 20px, 0); }
+            40% { clip: rect(90px, 9999px, 10px, 0); }
+            60% { clip: rect(20px, 9999px, 60px, 0); }
+            80% { clip: rect(60px, 9999px, 40px, 0); }
+            100% { clip: rect(50px, 9999px, 90px, 0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <canvas id="galaxy-canvas"></canvas>
+
+    <div class="black-hole-container">
+        <div class="black-hole"></div>
+        <div class="accretion-disk"></div>
+    </div>
+
+    <div class="glitch-wrapper">
+        <h1>404</h1>
+    </div>
+
+    <h2>Event Horizon Reached</h2>
+    <p>The page you are looking for has been sucked into a black hole or does not exist.</p>
+
+    <a href="portfolio.html" class="btn-home hover-trigger">
+        <i class="fas fa-rocket"></i> Return to Base
+    </a>
+
+    <script>
+        /* -----------------------------------------------------------
+           1. CURSOR
+           ----------------------------------------------------------- */
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+        document.body.addEventListener('mouseover', (e) => {
+            if (e.target.closest('.hover-trigger')) document.body.classList.add('hovering');
+            else document.body.classList.remove('hovering');
+        });
+
+        /* -----------------------------------------------------------
+           2. PARTICLE BACKGROUND (Simplified)
+           ----------------------------------------------------------- */
+        const canvas = document.getElementById('galaxy-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+
+        function initGalaxy() {
+            width = window.innerWidth; height = window.innerHeight;
+            canvas.width = width; canvas.height = height;
+            particles = [];
+            for(let i=0; i<60; i++) {
+                particles.push({
+                    x: Math.random() * width, y: Math.random() * height,
+                    size: Math.random() * 2, speedX: (Math.random() - 0.5) * 0.2, speedY: (Math.random() - 0.5) * 0.2,
+                    opacity: Math.random() * 0.5 + 0.1
+                });
+            }
+        }
+        function animateGalaxy() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.x += p.speedX; p.y += p.speedY;
+                if(p.x < 0) p.x = width; if(p.x > width) p.x = 0;
+                if(p.y < 0) p.y = height; if(p.y > height) p.y = 0;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(99, 102, 241, ${p.opacity})`; ctx.fill();
+            });
+            requestAnimationFrame(animateGalaxy);
+        }
+        window.addEventListener('resize', initGalaxy); initGalaxy(); animateGalaxy();
+    </script>
+</body>
+</html>
