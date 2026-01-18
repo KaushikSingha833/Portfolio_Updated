@@ -317,6 +317,117 @@
         }
 
         /* -----------------------------------------------------------
+           MOBILE NAVIGATION STYLES
+           ----------------------------------------------------------- */
+        
+        /* 1. Toggle Button (Hidden on Desktop) */
+        .nav-toggle {
+            display: none; /* Default hidden */
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 9200;
+        }
+        
+        /* 2. Mobile Overlay (The Full Screen Menu) */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(3, 7, 18, 0.95); /* Deep dark background */
+            backdrop-filter: blur(15px);      /* Glass effect */
+            z-index: 9999;                    /* On top of everything */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            /* Animation States */
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+        
+        /* 3. Mobile Links Styling */
+        .mobile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .mobile-link {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            transition: color 0.3s;
+        }
+        
+        .mobile-link:hover {
+            color: var(--primary); /* Purple on hover */
+        }
+        
+        /* 4. Close Button */
+        .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+        .close-menu:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+/* -----------------------------------------------------------
+   MEDIA QUERIES (Triggering the Switch)
+   ----------------------------------------------------------- */
+@media (max-width: 900px) {
+    /* Hide the horizontal desktop links */
+    .nav-links.desktop-only {
+        display: none;
+    }
+    
+    /* Show the hamburger button */
+    .nav-toggle {
+        display: block;
+    }
+    
+    /* Reset Nav Container Layout */
+    nav {
+        justify-content: space-between;
+        padding: 15px 25px;
+        width: 90%;
+    }
+}
+
+        /* -----------------------------------------------------------
            MOBILE RESPONSIVENESS (FIXED)
            ----------------------------------------------------------- */
         @media (max-width: 900px) {
@@ -427,7 +538,8 @@
 
    <nav>
         <div class="nav-logo">KAUSHIK<span>.DEV</span></div>
-        <div class="nav-links">
+        
+        <div class="nav-links desktop-only">
             <a href="#about" class="hover-trigger">About</a>
             <a href="#skills" class="hover-trigger">Skills</a>
             <a href="#github" class="hover-trigger">Contributions</a>
@@ -436,7 +548,25 @@
             <a href="#projects" class="hover-trigger">Work</a>
             <a href="#contact" class="hover-trigger">Contact</a>
         </div>
+    
+        <button class="nav-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="close-menu" id="close-menu"><i class="fas fa-times"></i></button>
+        
+        <div class="mobile-links">
+            <a href="#about" class="mobile-link hover-trigger">About</a>
+            <a href="#skills" class="mobile-link hover-trigger">Skills</a>
+            <a href="#github" class="mobile-link hover-trigger">Code Activity</a>
+            <a href="#journey" class="mobile-link hover-trigger">Journey</a>
+            <a href="#certifications" class="mobile-link hover-trigger">Certifications</a>
+            <a href="#projects" class="mobile-link hover-trigger">Selected Work</a>
+            <a href="#contact" class="mobile-link hover-trigger">Contact Me</a>
+        </div>
+    </div>
 
     <section id="about" class="hero">
         <div class="container reveal">
@@ -1216,6 +1346,33 @@
                 }
             }, 2000); // 2 second delay
         });
+    });
+
+    /* -----------------------------------------------------------
+   JS: MOBILE MENU TOGGLE
+   ----------------------------------------------------------- */
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const mobileOverlay = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    
+    function openMenu() {
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Stop background scrolling
+    }
+    
+    function closeMenu() {
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+    
+    // Event Listeners
+    mobileToggle.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    
+    // Close menu automatically when a link is clicked
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
     });
 </script>
 </body>
