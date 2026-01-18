@@ -199,7 +199,22 @@
         .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
 
         nav {
-            position: fixed; top: 20px; left: 0; right: 0; margin: auto; width: 90%; max-width: 650px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 50px; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 9100;
+            position: fixed; 
+            top: 20px; 
+            left: 0; 
+            right: 0; 
+            margin: auto; 
+            width: 95%; /* Increased slightly */
+            max-width: 1100px; /* INCREASED from 650px to 1100px to fit all links */
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid var(--border); 
+            border-radius: 50px; 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            z-index: 9100;
         }
         .nav-logo { font-weight: 800; letter-spacing: -1px; font-size: 1.2rem; }
         .nav-logo span { color: var(--primary); }
@@ -357,12 +372,15 @@
     <div class="cursor-outline"></div>
     <canvas id="galaxy-canvas"></canvas>
 
-    <nav>
+   <nav>
         <div class="nav-logo">KAUSHIK<span>.DEV</span></div>
         <div class="nav-links">
             <a href="#about" class="hover-trigger">About</a>
             <a href="#skills" class="hover-trigger">Skills</a>
-            <a href="#journey" class="hover-trigger">Journey</a> <a href="#projects" class="hover-trigger">Work</a>
+            <a href="#github" class="hover-trigger">Contributions</a>
+            <a href="#journey" class="hover-trigger">Journey</a> 
+            <a href="#certifications" class="hover-trigger">Certifications</a>
+            <a href="#projects" class="hover-trigger">Work</a>
             <a href="#contact" class="hover-trigger">Contact</a>
         </div>
     </nav>
