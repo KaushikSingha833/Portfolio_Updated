@@ -1171,9 +1171,19 @@
     /* -----------------------------------------------------------
        3. LINK INTERCEPTION LOGIC
        ----------------------------------------------------------- */
+    /* -----------------------------------------------------------
+       JS 3: LINK INTERCEPTION LOGIC (FIXED)
+       ----------------------------------------------------------- */
     const overlay = document.getElementById('loader-overlay');
     
-    // Select all links (Internal + External)
+    // FIX: Listen for the 'pageshow' event.
+    // This runs when the page is loaded OR restored from the Back-Forward Cache.
+    window.addEventListener('pageshow', function(event) {
+        // Force-remove the active class so the page is visible again
+        overlay.classList.remove('active');
+    });
+
+    // Select all links
     const links = document.querySelectorAll('a');
 
     links.forEach(link => {
@@ -1181,33 +1191,32 @@
             const href = this.getAttribute('href');
             const target = this.getAttribute('target');
 
-            // 1. Ignore Anchor links (#section)
+            // 1. Ignore Anchor links (internal page jumps)
             if (!href || href.startsWith('#')) return;
             
-            // 2. Ignore Download links (Resume)
-            if (this.hasAttribute('download')) return;
+            // 2. Ignore Download links and Email/Phone
+            if (this.hasAttribute('download') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-            // 3. Ignore "mailto:" and "tel:"
-            if (href.startsWith('mailto:') || href.startsWith('tel:')) return;
-
-            // Intercept!
+            // 3. Handle External Links (Open in new tab vs same tab)
             e.preventDefault();
             
             // Show Loading Screen
             overlay.classList.add('active');
 
-            // Wait 2 seconds, then navigate
             setTimeout(() => {
                 if(target === '_blank') {
+                    // Open in new tab
                     window.open(href, '_blank');
-                    overlay.classList.remove('active'); // Hide again if opening new tab
+                    // Remove loader immediately because we are still on this page
+                    overlay.classList.remove('active'); 
                 } else {
+                    // Navigate in same tab
                     window.location.href = href;
+                    // Note: The 'pageshow' listener above will handle the "Back" button case
                 }
-            }, 2000);
+            }, 2000); // 2 second delay
         });
     });
-
 </script>
 </body>
 </html>
