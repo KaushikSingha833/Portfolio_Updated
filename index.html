@@ -262,6 +262,59 @@
         .social-links { display: flex; justify-content: center; gap: 30px; margin-top: 40px; font-size: 1.5rem; }
         .social-links a { color: var(--text-muted); transition: 0.3s; }
         .social-links a:hover { color: var(--primary); transform: translateY(-3px); }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* GitHub takes 2 parts, LeetCode takes 1 */
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+
+        .stat-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Mobile Responsiveness for Activity Grid */
+        @media (max-width: 900px) {
+            .activity-grid {
+                grid-template-columns: 1fr; /* Stack vertically on mobile */
+            }
+            .stat-card {
+                padding: 20px;
+            }
+        }
 
         /* -----------------------------------------------------------
            MOBILE RESPONSIVENESS (FIXED)
@@ -460,20 +513,62 @@
         </div>
     </section>
 
-    <section id="github" style="padding: 50px 0;">
-        <div class="container reveal">
-            <span class="section-tag">Code Activity</span>
-            <h2>My Contributions</h2>
+    <section id="github" style="padding: 100px 0;">
+    <div class="container reveal">
+        <span class="section-tag">Code Activity</span>
+        <h2>Open Source & Problem Solving</h2>
+        
+        <div class="activity-grid">
             
-            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px; overflow-x: auto;">
-                <img src="https://ghchart.rshah.org/6366f1/KaushikSingha833" alt="Kaushik's GitHub Chart" style="width: 100%; min-width: 700px;">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">
+                        <i class="fab fa-github" style="font-size: 1.5rem;"></i> 
+                        GitHub Contributions
+                    </div>
+                    <a href="https://github.com/KaushikSingha833" target="_blank" class="btn btn-outline hover-trigger" style="font-size: 0.8rem; padding: 5px 15px;">
+                        @KaushikSingha833
+                    </a>
+                </div>
                 
-                <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem;">
-                    <span><i class="fab fa-github"></i> &nbsp; Data sourced live from GitHub</span>
-                    <a href="https://github.com/KaushikSingha833" target="_blank" style="color: var(--primary); text-decoration: none;">Follow me @KaushikSingha833</a>
+                <div style="overflow-x: auto; padding-bottom: 10px;">
+                    <img src="https://ghchart.rshah.org/6366f1/KaushikSingha833" alt="Kaushik's GitHub Chart" style="min-width: 600px; width: 100%;">
+                </div>
+                
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px;">
+                    <i class="fas fa-code-branch" style="color: var(--secondary);"></i> 
+                    Consistent committer to open source and personal projects.
+                </p>
+            </div>
+
+            <div class="stat-card" style="border-color: rgba(99, 102, 241, 0.3);">
+                <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: var(--primary); filter: blur(60px); opacity: 0.2; pointer-events: none;"></div>
+
+                <div class="stat-header">
+                    <div class="stat-title">
+                        <span style="color: var(--primary); font-size: 1.5rem;"><i class="fas fa-laptop-code"></i></span>
+                        LeetCode
+                    </div>
+                    <a href="https://leetcode.com/Kaushik_Singha" target="_blank" class="hover-trigger" style="color: var(--text-muted); font-size: 0.9rem;">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://leetcard.jacoblin.cool/Kaushik_Singha?theme=dark&font=Inter&ext=heatmap&colors=111827,030712,f9fafb,9ca3af,6366f1,ec4899,3b82f6" 
+                        alt="LeetCode Stats" 
+                        style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <a href="https://leetcode.com/Kaushik_Singha" target="_blank" class="btn btn-primary hover-trigger" style="width: 100%; justify-content: center;">
+                        View Coding Profile
+                    </a>
                 </div>
             </div>
+
         </div>
+    </div>
     </section>
 
     <section id="capabilities" style="padding-bottom: 50px;">
